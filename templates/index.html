@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+    <title>Aplikasi Prediksi Penyakit Diabetes</title>
+</head>
+
+<body class="
+            flex flex-col
+            justify-between
+            item-center
+            p-8
+            min-h-screen
+            bg-gradient-to-r
+            from-green-400
+            to-blue-500
+            text-gray-800
+            md:flex-row
+        ">
+    <main class="bg-white p-16 rounded-lg">
+        <h1 class="text-3xl font-bold mb-8">
+            Prediksi Penyakit Diabetes:
+        </h1>
+        <form action="{{ url_for('predict') }}" method="post" class="flex flex-col">
+            <div id="main" class="grid grid-cols-2 gap-1 justify-evenly">
+                <div class="w-26">
+                    <label for="Pregnancies" class="mt-4 mb-2">Jumlah Kehamilan:</label>
+                </div>
+                <div>
+                    <input type="text" name="Pregnancies" placeholder="6 Kali" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class="w-26"></div>
+                <div class="w-26 ">
+                    <small>isi 0, bila jenis kelamin Laki-laki</small>
+                </div>
+                <div class=" w-26 ">
+                    <label for="Glucose" class="mb-2">Kadar Gula</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="Glucose" placeholder="148" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class=" w-26 ">
+                    <label for="BloodPressure" class="mb-2">Tekanan Darah</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="BloodPressure" placeholder="72" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class=" w-26 ">
+                    <label for="SkinThickness" class="mb-2">Ketebalan Kulit</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="SkinThickness" placeholder="35" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class=" w-26 ">
+                    <label for="Insulin" class="mb-2">Kadar Insulin</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="Insulin" placeholder="0" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class=" w-26 ">
+                    <label for="BMI" class="mb-2">Body Mass Index</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="BMI" placeholder="33.6" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class=" w-26 ">
+                    <label for="DiabetesPedigreeFunction" class="mb-2 mt-2">riwayat diabetes keluarga</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="DiabetesPedigreeFunction" placeholder="0.627" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+                <div class=" w-26 ">
+                    <label for="Age" class="mb-2">Usia</label>
+                </div>
+                <div class=" w-26 ">
+                    <input type="text" name="Age" placeholder="50" required="required" class="p-4 bg-gray-100 rounded-md" />
+                </div>
+            </div>
+
+
+            <!-- <label for="Jenis Kelamin" class="mt-4 mb-2">Jenis Kelamin:</label>
+            <select name="Jenis Kelamin" id="Jenis Kelamin" class="p-4 bg-gray-100 rounded-md">
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+            </select> -->
+
+            <button type="submit" class="
+                        flex
+                        justify-center
+                        align-center
+                        mt-8
+                        p-4
+                        bg-gradient-to-r
+                        from-green-400
+                        to-blue-500
+                        text-white
+                        rounded-md
+                    ">
+                    PREDIKSI SEKARANG
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-arrow-right ml-4"
+                    >
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+        </form>
+    </main>
+    <section class="mt-8 h-full flex-auto rounded-lg md:mt-0 md:ml-8">
+        <div class="bg-white p-16 rounded-lg">
+            <h1 class="text-2xl mb-8">
+                Hasil Prediksi
+            </h1>
+            <h2 class="text-5xl font-bold">{{ prediction_text }}</h2>
+        </div>
+        <div class="flex justify-around bg-white p-8 rounded-lg mt-8">
+            <ul>
+                <li>
+                    <p>Anggota Kelompok : </p>
+                </li>
+                <li>
+                    <small>Alian Hakim</small>
+                </li>
+                <li>
+                    <small>Ruswandhi Adhi Pratama</small>
+                </li>
+                <li>
+                    <small>Widi Fazriani</small>
+                </li>
+            </ul>
+            <img class="h-24 md:h-28" src="https://cdn4.iconfinder.com/data/icons/medical-14/512/13-512.png" alt="logo-dts" />
+
+        </div>
+    </section>
+</body>
+
+</html>
